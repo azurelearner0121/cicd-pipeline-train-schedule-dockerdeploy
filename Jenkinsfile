@@ -18,12 +18,13 @@ pipeline {
     stage('BuildDocker'){
       steps{
         echo 'BuildingDockerImage'
+        script {
         app=docker.build("gcr.io/teak-environs-348513/train-schedule")
         app.inside {       
              sh 'echo "Tests passed"'        
             }   
       }
-    
+      }
     } 
   
   }
