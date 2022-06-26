@@ -43,7 +43,7 @@ pipeline {
  
     stage('PushImageToECR') {
       steps{
-       echo 'Pushing imagetoECR 
+       echo 'Pushing imagetoECR'
         
       }
       
