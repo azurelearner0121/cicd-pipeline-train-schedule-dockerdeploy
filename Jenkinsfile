@@ -40,5 +40,35 @@ pipeline {
       }
       
     }
+ 
+    stage('PushImageToECR') {
+      steps{
+       echo 'Pushing imagetoECR 
+        
+      }
+      
+      
+    }
+    stage('DeployToGKE') {
+      steps {
+        echo 'Deplploying to GKE'
+        step([$class: 'KubernetesEngineBuilder', 
+                        projectId: "gke-service-account",
+                        clusterName: "test-cluster",
+                        zone: "us-central1-a",
+                        manifestPattern: 'k8s/staging/',
+                        credentialsId: "gke-service-account",
+                        verifyDeployments: true])
+        
+        
+      }
+      
+      
+    }
+  
+  
   }
+  
+  
+  
 }
