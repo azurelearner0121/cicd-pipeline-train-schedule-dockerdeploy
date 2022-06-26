@@ -53,7 +53,7 @@ pipeline {
       steps {
         echo 'Deplploying to GKE'
         step([$class: 'KubernetesEngineBuilder', 
-                        projectId: "gke-service-account",
+                        projectId: "teak-environs-348513",
                         clusterName: "test-cluster",
                         zone: "us-central1-a",
                         manifestPattern: 'deployment.yaml',
