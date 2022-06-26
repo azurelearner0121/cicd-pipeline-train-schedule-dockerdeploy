@@ -31,7 +31,7 @@ pipeline {
       steps {
        echo 'PushingDockerImage' 
         script {
-        docker.withRegistry('https://gcr.io', 'My First Project') {
+        docker.withRegistry('https://gcr.io', 'gcr:My First Project') {
          app.push("${env.BUILD_NUMBER}")            
          app.push("latest")     
         }
