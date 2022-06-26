@@ -10,17 +10,17 @@ pipeline {
     
     }
     stage('ArchiveArtifact'){
+      steps {
     echo  'Archive Artifact'
       archiveArtifacts artifacts: 'dist/trainSchedule.zip   
-    
+      }
     }
     stage('BuildDocker'){
+      steps{
     echo 'BuildingDockerImage'
-    
+      }
     
     } 
   
   }
 }
-
-
