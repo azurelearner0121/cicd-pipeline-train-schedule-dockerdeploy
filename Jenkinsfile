@@ -12,7 +12,7 @@ pipeline {
     stage('ArchiveArtifact'){
       steps {
     echo  'Archive Artifact'
-      archiveArtifacts artifacts: 'dist/trainSchedule.zip   
+      archiveArtifacts artifacts: 'dist/trainSchedule.zip'   
       }
     }
     stage('BuildDocker'){
