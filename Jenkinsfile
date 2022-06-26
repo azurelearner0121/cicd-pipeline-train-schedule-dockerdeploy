@@ -56,7 +56,7 @@ pipeline {
                         projectId: "gke-service-account",
                         clusterName: "test-cluster",
                         zone: "us-central1-a",
-                        manifestPattern: 'k8s/staging/',
+                        manifestPattern: 'deployment.yaml',
                         credentialsId: "gke-service-account",
                         verifyDeployments: true])
         
