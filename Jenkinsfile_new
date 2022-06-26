@@ -1,0 +1,25 @@
+pipeline {
+  agent { label 'dev-agent'}
+  stages {
+    stage('BuildCode'){
+    steps{
+     echo 'In build step'
+    
+    }
+    
+    }
+    stage('ArchiveArtifact'){
+    echo  'Archive Artifact'
+    
+    
+    }
+    stage('BuildDocker'){
+    echo 'BuildingDockerImage'
+    
+    
+    } 
+  
+  }
+}
+
+
