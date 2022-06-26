@@ -25,7 +25,18 @@ pipeline {
             }   
       }
       }
+      
     } 
-  
+    stage('PushDockerImage'){
+      steps {
+       echo 'PushingDockerImage' 
+        docker.withRegistry('https://gcr.io', 'gcr_service_account') {
+         app.push("${env.BUILD_NUMBER}")            
+         app.push("latest")     
+        }
+        
+      }
+      
+    }
   }
 }
