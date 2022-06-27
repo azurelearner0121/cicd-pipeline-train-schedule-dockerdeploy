@@ -49,11 +49,10 @@ pipeline {
            sh 'az aks get-credentials --resource-group az104-revision --name test-jenkins'
            sh 'kubectl get svc'
            sh 'kubectl apply -f deployment.yaml'
-        }
-        }
-        
-      }
+              
+               }
       
+             }
     }
     
    /*stage('PushDockerImageGCR'){
