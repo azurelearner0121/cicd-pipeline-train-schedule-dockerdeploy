@@ -19,7 +19,7 @@ pipeline {
       steps{
         echo 'BuildingDockerImage'
         script {
-        app=docker.build("teak-environs-348513/train-schedule")
+        app=docker.build("train-schedule")
         app.inside {       
              sh 'echo "Tests passed"'        
             }   
@@ -31,7 +31,7 @@ pipeline {
       steps {
        echo 'PushingDockerImage' 
         script {
-        docker.withRegistry('https://gcr.io', 'gcr:My First Project') {
+        docker.withRegistry('https://gcr.io/teak-environs-348513', 'gcr:My First Project') {
          app.push("${env.BUILD_NUMBER}")            
          app.push("latest")     
         }
