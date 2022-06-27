@@ -75,6 +75,7 @@ pipeline {
       
     }*/
     stage('DeployToEKS'){
+      steps {
      echo 'DeployToEKS'
       script {
          echo 'authenticate to cluster'
@@ -83,10 +84,12 @@ pipeline {
          sh 'kubectl get all --all-namespaces'
          sh  'kubectl apply -f deployment.yaml'
       }
-      
+      }
       
     }
   
+    
+    
   }
   
   
