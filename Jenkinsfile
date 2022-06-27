@@ -47,7 +47,7 @@ pipeline {
        echo 'Pushing imagetoECR'
         script {
        //  app.tag('train-schedule')
-         docker.withRegistry('https://457335132494.dkr.ecr.us-east-1.amazonaws.com/', 'ecr:aws_ecr_push') {
+         docker.withRegistry('https://457335132494.dkr.ecr.us-east-1.amazonaws.com/', 'ecr:us-east-1:aws_ecr_push') {
          app.push("${env.BUILD_NUMBER}")            
          app.push("latest")  
           
