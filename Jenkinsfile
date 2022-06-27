@@ -33,7 +33,7 @@ pipeline {
       steps {
        echo 'PushingDockerImageToACR' 
         script {
-        docker.withRegistry('https://testjenkins.azurecr.io', 'acr-cred') {
+        docker.withRegistry('https://<azure-repo-name>', 'acr-cred') {
          app.push("${env.BUILD_NUMBER}")            
          app.push("latest")     
         }
@@ -46,11 +46,11 @@ pipeline {
       steps {
        echo 'DeployingToAKs' 
         script {
-           withCredentials([azureServicePrincipal('azure-cred')]) {
+           withCredentials([azureServicePrincipal('<azure-credential-name-in-jenkins>')]) {
                sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
                                                                   }
 
-           sh 'az aks get-credentials --resource-group az104-revision --name test-jenkins'
+           sh 'az aks get-credentials --resource-group rg-name --name cluster-name'
            sh 'kubectl get svc'
            sh 'kubectl apply -f deployment.yaml'
               
@@ -58,7 +58,21 @@ pipeline {
       
              }
     }
+    /*
+    To integrate jenkins with Azure
+    For ACR:
+    1. Create a service principal in azure, az ad sp create-for0rbac
+    2. Give that sp contritor role to the ACR
+    3. Create a credential in jenkins(username and pwd) with sp client id and client password
+    4. Follow normal docker build step with username/pwd credential
+    For AKS
+    1. Install the Azure credential plugin in jenkins
+    2. Create a srrvice princiapl wit clutser admin access to aks
+    3. Create a jenkins credentil with the azure sp
+    4. Two steps - az login with the service princiapl and then az aks get-cred with aks cluster,followed by normal deploymet
     
+    
+    */
    /*stage('PushDockerImageGCR'){
       steps {
        echo 'PushingDockerImage' 
@@ -78,7 +92,7 @@ pipeline {
        echo 'Pushing imagetoECR'
         script {
        //  app.tag('train-schedule')
-         docker.withRegistry('https://457335132494.dkr.ecr.us-east-1.amazonaws.com/', 'ecr:us-east-1:aws_ecr_push') {
+         docker.withRegistry('https://<aws-ac-id>.dkr.ecr.us-east-1.amazonaws.com/', 'ecr:us-east-1:aws_ecr_push') {
          app.push("${env.BUILD_NUMBER}")            
          app.push("latest")  
           
@@ -103,7 +117,7 @@ pipeline {
       steps {
         echo 'Deplploying to GKE'
         step([$class: 'KubernetesEngineBuilder', 
-                        projectId: "teak-environs-348513",
+                        projectId: "<gcp-proj-id>",
                         clusterName: "test-cluster",
                         zone: "us-central1-a",
                         manifestPattern: 'deployment.yaml',
