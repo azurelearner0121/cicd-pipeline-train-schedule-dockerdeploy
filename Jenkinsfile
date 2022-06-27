@@ -42,7 +42,7 @@ pipeline {
       }
       
     }
-    stage('DeployToAKS)
+    stage('DeployToAKS'){
       steps {
        echo 'DeployingToAKs' 
         script {
