@@ -9,7 +9,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 8080
   type: LoadBalancer
 ---
 apiVersion: apps/v1
@@ -32,4 +32,4 @@ spec:
       - name: train-schedule
         image: gcr.io/teak-environs-348513/train-schedule:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8080
