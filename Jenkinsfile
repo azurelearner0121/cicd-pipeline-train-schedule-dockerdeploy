@@ -1,6 +1,5 @@
 pipeline {
   agent { label 'dev-agent'}
-  e
   stages {
     stage('BuildCode'){
     steps{
