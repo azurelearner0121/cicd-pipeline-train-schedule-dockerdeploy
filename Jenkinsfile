@@ -74,6 +74,38 @@ pipeline {
       
       
     }*/
+    /* 
+    
+    To enable jenkins to deploy to EKS do the below:
+    1. Configure aws cli with aws configure commadn in the worker node
+    2. Give the user policy permission to authenticate to cluster
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "eks:DescribeCluster",
+                "eks:ListClusters"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+    3. Run the below eksctl command to add the jenkins user to cluster auth configmap
+    eksctl create iamidentitymapping \
+    --cluster test-cluster-new \
+    --region=us-east-1 \
+    --arn arn:aws:iam::457335132494:user/jenkins-user\
+    --group system:masters  \
+    --no-duplicate-arns
+   The group is derived from kubectl describe clsterrolebinding cluster-admin command output
+   
+    4. Generate kubeconfig entry for the jenkins user to authenticate to the cluster
+    'aws eks --region us-east-1 update-kubeconfig --name test-cluster-new'
+    
+    
+    */
     stage('DeployToEKS'){
       steps {
      echo 'DeployToEKS'
