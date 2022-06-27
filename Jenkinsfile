@@ -58,6 +58,16 @@ pipeline {
       
       
     }
+    /* To deploy to GKEdo the following
+    1. Create a service account in GKE
+    2. Add a principal with the service account
+    3. Add the Roles - Storage Admin (to push to GCR), Kubernetes Cluster Engine Administrator (To deploy to GKE)
+    4. Plugins in Jenkins - Google Container Registry plugin , Google OAuth Cred plugin, Google Kubernetes Engine plugin
+    5. Create a credential in jenkins with the service account key generated , credential type: Google service account from Private key
+    6. Use the below plugin to deploy to GKE
+    
+    
+    */
     /* stage('DeployToGKE') {
       steps {
         echo 'Deplploying to GKE'
@@ -103,6 +113,8 @@ pipeline {
    
     4. Generate kubeconfig entry for the jenkins user to authenticate to the cluster
     'aws eks --region us-east-1 update-kubeconfig --name test-cluster-new'
+    5. Plugin needed in Jrnkins - Amazon ECR plugin, Cloudbees plugin for AWS
+    6. Credential type in Jenkins - AWS credentials. Takes in access key and secret access key
     
     
     */
