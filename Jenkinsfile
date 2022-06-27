@@ -19,8 +19,9 @@ pipeline {
       steps{
         echo 'BuildingDockerImage'
         script {
-        app=docker.build("teak-environs-348513/train-schedule")
-        app.inside {       
+       // app=docker.build("teak-environs-348513/train-schedule")
+           app=docker.build("train-schedule")
+           app.inside {       
              sh 'echo "Tests passed"'        
             }   
       }
@@ -45,7 +46,7 @@ pipeline {
       steps{
        echo 'Pushing imagetoECR'
         script {
-         app.tag('train-schedule')
+       //  app.tag('train-schedule')
          docker.withRegistry('457335132494.dkr.ecr.us-east-1.amazonaws.com/', 'ecr:aws_ecr_push') {
          app.push("${env.BUILD_NUMBER}")            
          app.push("latest")  
