@@ -79,9 +79,10 @@ pipeline {
      echo 'DeployToEKS'
       script {
          echo 'authenticate to cluster'
+         sh 'aws sts get-caller-identity'
          sh 'aws eks --region us-east-1 update-kubeconfig --name test-cluster-new'
          echo 'get all objects'
-         sh 'kubectl get all --all-namespaces'
+         sh 'kubectl get svc'
          sh  'kubectl apply -f deployment.yaml'
       }
       }
