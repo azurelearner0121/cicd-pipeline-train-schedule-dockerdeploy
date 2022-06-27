@@ -77,6 +77,7 @@ pipeline {
     stage('DeployToEKS'){
      echo 'DeployToEKS'
       script {
+         sh 'aws eks --region us-east-1 update-kubeconfig --name cluster_name test-cluster-new'
          sh  'kubectl apply -f deployment.yaml'
       }
       
