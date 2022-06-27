@@ -30,8 +30,8 @@ spec:
     spec:
       containers:
       - name: train-schedule
-        image: 457335132494.dkr.ecr.us-east-1.amazonaws.com/train-schedule:latest
-        image: image: testjenkins.azurecr.io/train-schedule:latest
-     #   image: gcr.io/teak-environs-348513/train-schedule:latest
+     #   image: <amz-account-id>.dkr.ecr.us-east-1.amazonaws.com/train-schedule:latest
+        image: testjenkins.azurecr.io/train-schedule:latest
+     #   image: gcr.io/<gcp-project-id>/train-schedule:latest
         ports:
         - containerPort: 8080
