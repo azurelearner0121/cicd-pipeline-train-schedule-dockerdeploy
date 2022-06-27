@@ -33,7 +33,7 @@ pipeline {
       steps {
        echo 'PushingDockerImageToACR' 
         script {
-        docker.withRegistry('https://testjenkins.azurecr.io', 'acr:acr-cred') {
+        docker.withRegistry('https://testjenkins.azurecr.io', 'acr-cred') {
          app.push("${env.BUILD_NUMBER}")            
          app.push("latest")     
         }
