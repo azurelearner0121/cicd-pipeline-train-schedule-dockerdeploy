@@ -1,5 +1,6 @@
 pipeline {
   agent { label 'dev-agent'}
+  e
   stages {
     stage('BuildCode'){
     steps{
@@ -46,6 +47,10 @@ pipeline {
       steps {
        echo 'DeployingToAKs' 
         script {
+           withCredentials([azureServicePrincipal('azure-cred')]) {
+               sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
+                                                                  }
+
            sh 'az aks get-credentials --resource-group az104-revision --name test-jenkins'
            sh 'kubectl get svc'
            sh 'kubectl apply -f deployment.yaml'
