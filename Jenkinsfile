@@ -79,7 +79,7 @@ pipeline {
      echo 'DeployToEKS'
       script {
          echo 'authenticate to cluster'
-         sh 'aws eks --region us-east-1 update-kubeconfig --name cluster_name test-cluster-new'
+         sh 'aws eks --region us-east-1 update-kubeconfig --name test-cluster-new'
          echo 'get all objects'
          sh 'kubectl get all --all-namespaces'
          sh  'kubectl apply -f deployment.yaml'
