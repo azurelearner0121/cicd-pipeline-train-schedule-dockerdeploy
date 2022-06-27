@@ -27,7 +27,7 @@ pipeline {
       }
       
     } 
-    stage('PushDockerImage'){
+   /*stage('PushDockerImageGCR'){
       steps {
        echo 'PushingDockerImage' 
         script {
@@ -39,13 +39,16 @@ pipeline {
         
       }
       
-    }
+    }*/
  
     stage('PushImageToECR') {
       steps{
        echo 'Pushing imagetoECR'
         script {
-         app.tag(train-schedule:latest)
+         app.tag(train-schedule)
+         docker.withRegistry('457335132494.dkr.ecr.us-east-1.amazonaws.com/', 'ecr:aws_ecr_push') {
+         app.push("${env.BUILD_NUMBER}")            
+         app.push("latest")  
           
         }
         }
@@ -54,7 +57,7 @@ pipeline {
       
       
     }
-    stage('DeployToGKE') {
+    /* stage('DeployToGKE') {
       steps {
         echo 'Deplploying to GKE'
         step([$class: 'KubernetesEngineBuilder', 
@@ -69,7 +72,7 @@ pipeline {
       }
       
       
-    }
+    }*/
   
   
   }
