@@ -74,7 +74,14 @@ pipeline {
       
       
     }*/
-  
+    stage('DeployToEKS'){
+     echo 'DeployToEKS'
+      script {
+         sh  'kubectl apply -f deployment.yaml'
+      }
+      
+      
+    }
   
   }
   
