@@ -44,6 +44,11 @@ pipeline {
     stage('PushImageToECR') {
       steps{
        echo 'Pushing imagetoECR'
+        script {
+         app.tag(train-schedule:latest)
+          
+        }
+        }
         
       }
       
