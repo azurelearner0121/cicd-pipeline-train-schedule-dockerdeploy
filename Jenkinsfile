@@ -28,6 +28,20 @@ pipeline {
       }
       
     } 
+    
+    stage('PushDockerImageACR'){
+      steps {
+       echo 'PushingDockerImageToACR' 
+        script {
+        docker.withRegistry('https://testjenkins.azurecr.io', 'acr:acr-cred') {
+         app.push("${env.BUILD_NUMBER}")            
+         app.push("latest")     
+        }
+        }
+        
+      }
+      
+    }
    /*stage('PushDockerImageGCR'){
       steps {
        echo 'PushingDockerImage' 
@@ -42,7 +56,7 @@ pipeline {
       
     }*/
  
-    stage('PushImageToECR') {
+   /* stage('PushImageToECR') {
       steps{
        echo 'Pushing imagetoECR'
         script {
@@ -57,7 +71,7 @@ pipeline {
       }
       
       
-    }
+    }*/
     /* To deploy to GKEdo the following
     1. Create a service account in GKE
     2. Add a principal with the service account
@@ -118,7 +132,7 @@ pipeline {
     
     
     */
-    stage('DeployToEKS'){
+  /*  stage('DeployToEKS'){
       steps {
      echo 'DeployToEKS'
       script {
@@ -131,7 +145,7 @@ pipeline {
       }
       }
       
-    }
+    }*/
   
     
     
